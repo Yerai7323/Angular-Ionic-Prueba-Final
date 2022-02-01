@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'MOVIES.TITLE' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" (click)="toEnglish('en')">EN</ion-button>
+      <ion-button size="small" (click)="toSpanish('es')">ES</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Cargamos las tarjetas de las películas -->
+  <app-loader [state]="moviesState" (retry)="getMovies()">
+    <app-card *ngFor="let movie of movies" [routerLink]="[movie.id]">
+      <ion-grid class="ion-margin">
+        <ion-row>
+          <ion-col> {{movie.title}} </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="movie.poster">
+          <ion-col>
+            <img src="{{movie.poster}}" alt="{{movie.title}}" />
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col *ngFor="let g of movie.genre" size="4"> #{{g}} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </app-card>
+  </app-loader>
+  <!-- Botoón para añadir una pelicula -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/movie-new-or-edit">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

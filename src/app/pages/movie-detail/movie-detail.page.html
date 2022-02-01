@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/movies"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="movie">{{movie.title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" (click)="toEnglish('en')">EN</ion-button>
+      <ion-button size="small" (click)="toSpanish('es')">ES</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab class="ion-row" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-row *ngIf="movie">
+      <ion-col>
+        <ion-fab-button
+          color="primary"
+          [routerLink]="['/movie-new-or-edit/', movie.id]"
+        >
+          <ion-icon name="create"></ion-icon>
+        </ion-fab-button>
+      </ion-col>
+      <ion-col>
+        <ion-fab-button color="danger" (click)="presentAlertConfirm()">
+          <ion-icon name="trash"></ion-icon>
+        </ion-fab-button>
+      </ion-col>
+    </ion-row>
+  </ion-fab>
+
+  <ion-grid>
+    <app-loader [state]="movieDetailState" (retry)="getMovie()">
+      <ion-row *ngIf="movie">
+        <ion-col *ngIf="movie.poster">
+          <img src="{{movie.poster}}" alt="{{movie.title}}" />
+        </ion-col>
+        <ion-col *ngIf="!movie.poster">
+          <p>{{ 'MOVIEDETAIL.NOIMAGE' | translate }}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="movie">
+        <ion-col size="6">
+          <h4>{{ 'MOVIEDETAIL.IMDBRATING' | translate }}</h4>
+          <p>{{movie.imdbRating}}</p>
+        </ion-col>
+        <ion-col size="6" class="ion-text-end">
+          <h4>{{ 'MOVIEDETAIL.DURATION' | translate }}</h4>
+          <p>{{durationFormated}}</p>
+        </ion-col>
+      </ion-row>
+    </app-loader>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="ion-no-padding">
+          <h4>{{ 'MOVIEDETAIL.ACTORS' | translate }}</h4>
+        </ion-item>
+        <app-loader [state]="actorsDetailState" (retry)="getActors()">
+          <ion-row
+            *ngFor="let actor of movieActors"
+            size="12"
+            class="ion-margin-top"
+            >{{actor.first_name}} {{actor.last_name}}
+          </ion-row>
+        </app-loader>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="ion-no-padding">
+          <h4>{{ 'MOVIEDETAIL.COMPANY' | translate }}</h4>
+        </ion-item>
+        <app-loader [state]="companyDetailState" (retry)="getCompanies()">
+          <ion-row *ngIf="movieCompany" size="12" class="ion-margin-top"
+            >{{movieCompany.name}}
+          </ion-row>
+        </app-loader>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="movie">
+      <ion-col>
+        <ion-item class="ion-no-padding">
+          <h4>{{ 'MOVIEDETAIL.GENRE' | translate }}</h4>
+        </ion-item>
+        <ion-row class="ion-margin-top">
+          <ion-col *ngFor="let g of movie.genre" size="4">#{{g}}</ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

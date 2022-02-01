@@ -1,0 +1,25 @@
+<ng-container [ngSwitch]="state">
+  <ng-container *ngSwitchCase="loaderState.loading">
+    <ion-spinner
+      name="dots"
+      style="width: 100%"
+      color="primary"
+      class="ion-margin-top"
+    ></ion-spinner>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="loaderState.error">
+    <ion-grid class="ion-margin ion-text-center">
+      <ion-row>
+        <ion-col> No hemos podido recoger los datos </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="onRetry()">Retry</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+
+  <ng-content *ngSwitchCase="loaderState.loaded"></ng-content>
+</ng-container>

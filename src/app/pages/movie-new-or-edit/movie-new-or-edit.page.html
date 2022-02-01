@@ -1,0 +1,116 @@
+<ion-header *ngIf="movieId else new">
+  <app-loader [state]="movieEditState" (retry)="getMovie()">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/movies/{{movieId}}"></ion-back-button>
+      </ion-buttons>
+      <ion-title *ngIf="movie">{{movie.title}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button size="small" (click)="toEnglish('en')">EN</ion-button>
+        <ion-button size="small" (click)="toSpanish('es')">ES</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </app-loader>
+</ion-header>
+
+<ng-template #new>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/movies"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{ 'NEWOREDITMOVIE.TITLEHEADER' | translate }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button size="small" (click)="toEnglish('en')">EN</ion-button>
+        <ion-button size="small" (click)="toSpanish('es')">ES</ion-button>
+      </ion-buttons>
+    </ion-toolbar> 
+  </ion-header>
+</ng-template>
+
+<ion-content>
+  <app-loader [state]="movieEditState" (retry)="getMovie()" >
+    <form [formGroup]="form" class="ion-margin">
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.TITLE' | translate }}</ion-label>
+        <ion-input formControlName="title" placeholder="{{ 'NEWOREDITMOVIE.TITLE' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.POSTER' | translate }} (url)</ion-label>
+        <ion-input
+          formControlName="poster"
+          type="url"
+          placeholder="{{ 'NEWOREDITMOVIE.POSTER' | translate }} (url)"
+        ></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.GENRE' | translate }}</ion-label>
+        <ion-select
+          class="custom-options"
+          multiple="true"
+          formControlName="genre"
+          placeholder="{{ 'NEWOREDITMOVIE.PHOLDERGENRE' | translate }}"
+        >
+          <ion-select-option *ngFor="let g of genres" value="{{g}}"
+            >#{{g}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.ACTORS' | translate }}</ion-label>
+        <ion-select
+          class="custom-options"
+          multiple="true"
+          formControlName="actors"
+          placeholder="{{ 'NEWOREDITMOVIE.PHOLDERACTORS' | translate }}"
+        >
+          <ion-select-option *ngFor="let a of actors" value="{{a.id}}"
+            >{{a.first_name}} {{ a.last_name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.COMPANY' | translate }}</ion-label>
+        <ion-select
+          class="custom-options"
+          formControlName="company"
+          placeholder="{{ 'NEWOREDITMOVIE.PHOLDERCOMPANY' | translate }}"
+        >
+          <ion-select-option *ngFor="let c of companies" value="{{c.name}}"
+            >{{c.name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.YEAR' | translate }}</ion-label>
+        <ion-input
+          formControlName="year"
+          type="number"
+          placeholder="{{ 'NEWOREDITMOVIE.YEAR' | translate }}"
+        ></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.DURATION' | translate }}</ion-label>
+        <ion-input
+          formControlName="duration"
+          type="number"
+          placeholder="{{ 'NEWOREDITMOVIE.DURATION' | translate }}"
+        ></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="stacked">{{ 'NEWOREDITMOVIE.IMDBRATING' | translate }}</ion-label>
+        <ion-input
+          formControlName="imdbRating"
+          type="number"
+          placeholder="{{ 'NEWOREDITMOVIE.IMDBRATING' | translate }}"
+        ></ion-input>
+      </ion-item>
+    </form>
+  </app-loader>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="updateOrCreateMovie()">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

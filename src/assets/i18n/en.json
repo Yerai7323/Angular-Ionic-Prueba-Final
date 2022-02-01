@@ -1,0 +1,34 @@
+{
+  "HOME": {
+    "HEADER-TITLE": "Home",
+    "WELCOME": "Welcome to the home"
+  },
+  "SIDEMENU":{
+    "TITLE": "Exam App"
+  },
+  "MOVIES":{
+    "TITLE": "Movies"
+  },
+  "NEWOREDITMOVIE":{
+    "TITLEHEADER": "New movie",
+    "TITLE": "Title",
+    "POSTER": "Poster",
+    "GENRE": "Genre",
+    "PHOLDERGENRE": "Choose the genres",
+    "ACTORS": "Actors",
+    "PHOLDERACTORS": "Choose the actors",
+    "COMPANY": "Company",
+    "PHOLDERCOMPANY": "Choose the company",
+    "YEAR": "Year",
+    "DURATION": "Duration",
+    "IMDBRATING": "imdbRating"
+  },
+  "MOVIEDETAIL":{
+    "NOIMAGE": "IMAGE NO AVAILABLE",
+    "IMDBRATING": "imdbRating",
+    "DURATION": "Duration",
+    "ACTORS": "Actors",
+    "COMPANY": "Company",
+    "GENRE": "Genre"
+}
+}

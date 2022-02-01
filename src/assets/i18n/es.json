@@ -1,0 +1,35 @@
+{
+  "HOME": {
+    "HEADER-TITLE": "Inicio",
+    "WELCOME": "Bienvenido al inicio"
+  },
+  "SIDEMENU":{
+    "TITLE": "Exámen App"
+  },
+  "MOVIES":{
+    "TITLE": "Películas"
+  },
+  "NEWOREDITMOVIE":{
+    "TITLEHEADER": "Nueva Película",
+    "TITLE": "Titulo",
+    "POSTER": "Póster",
+    "GENRE": "Genero",
+    "PHOLDERGENRE": "Selecciona los géneros",
+    "ACTORS": "Actores",
+    "PHOLDERACTORS": "Selecciona los actores",
+    "COMPANY": "Estudio",
+    "PHOLDERCOMPANY": "Selecciona el estudio",
+    "YEAR": "Año",
+    "DURATION": "Duratión",
+    "IMDBRATING": "Puntuación"
+  },
+  "MOVIEDETAIL": {
+    "NOIMAGE": "Imágen no disponible",
+    "IMDBRATING": "Puntuación",
+    "DURATION": "Duratión",
+    "ACTORS": "Actores",
+    "COMPANY": "Estudio",
+    "GENRE": "Genero"
+  }
+
+}
